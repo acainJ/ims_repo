@@ -1,13 +1,42 @@
-<div class="supplier-container">
-  <h1>Suppliers</h1>
+<div class="supplier-container mt-4">
+  <h2 class="text-center mb-4">Suppliers</h2>
 
+  <!-- Add Supplier Form -->
+  <div class="card p-3 mb-4">
+    <h4>Add Supplier</h4>
+    <div class="mb-3">
+      <input type="text" class="form-control" placeholder="Supplier Name" [(ngModel)]="newSupplier.supplier_name" />
+    </div>
+    <div class="mb-3">
+      <input type="text" class="form-control" placeholder="Contact Info" [(ngModel)]="newSupplier.contact_info" />
+    </div>
+    <button class="btn btn-success" (click)="addSupplier()">Add Supplier</button>
+  </div>
+
+  <!-- Edit Supplier Form -->
+  <div *ngIf="editMode && selectedSupplier" class="card p-3 mb-4">
+    <h4>Edit Supplier</h4>
+    <div class="mb-3">
+      <input type="text" class="form-control" [(ngModel)]="selectedSupplier.supplier_name" />
+    </div>
+    <div class="mb-3">
+      <input type="text" class="form-control" [(ngModel)]="selectedSupplier.contact_info" />
+    </div>
+    <div class="d-flex gap-2">
+      <button class="btn btn-primary" (click)="updateSupplier()">Update</button>
+      <button class="btn btn-secondary" (click)="editMode = false">Cancel</button>
+    </div>
+  </div>
+  
+  <!-- Supplier List -->
   <div class="table-responsive">
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-hover">
       <thead class="table-primary">
         <tr>
           <th>ID</th>
-          <th>Supplier Name</th>
-          <th>Contact Info</th>
+          <th>Name</th>
+          <th>Contact</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -15,6 +44,10 @@
           <td>{{ supplier.supplier_id }}</td>
           <td>{{ supplier.supplier_name }}</td>
           <td>{{ supplier.contact_info }}</td>
+          <td class="d-flex gap-2">
+            <button class="btn btn-warning btn-sm" (click)="editSupplier(supplier)">Edit</button>
+            <button class="btn btn-danger btn-sm" (click)="deleteSupplier(supplier.supplier_id)">Delete</button>
+          </td>
         </tr>
       </tbody>
     </table>

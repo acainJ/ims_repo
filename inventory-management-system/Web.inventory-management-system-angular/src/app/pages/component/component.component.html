@@ -1,23 +1,55 @@
-<div class="component-container">
-    <h1>Components</h1>
-  
-    <div class="table-responsive">
-      <table class="table table-bordered table-striped">
-        <thead class="table-primary">
-          <tr>
-            <th>ID</th>
-            <th>Component Name</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let component of components">
-            <td>{{ component.component_id }}</td>
-            <td>{{ component.component_name }}</td>
-            <td>{{ component.description }}</td>
-          </tr>
-        </tbody>
-      </table>
+<div class="component-container mt-4">
+  <h2 class="text-center mb-4">Components</h2>
+
+  <!-- Add Component Form -->
+  <div class="card p-3 mb-4">
+    <h4>Add Component</h4>
+    <div class="mb-3">
+      <input type="text" class="form-control" placeholder="Component Name" [(ngModel)]="newComponent.component_name" />
+    </div>
+    <div class="mb-3">
+      <input type="text" class="form-control" placeholder="Description" [(ngModel)]="newComponent.description" />
+    </div>
+    <button class="btn btn-success" (click)="addComponent()">Add Component</button>
+  </div>
+
+  <!-- Edit Component Form -->
+  <div *ngIf="editMode && selectedComponent" class="card p-3 mb-4">
+    <h4>Edit Component</h4>
+    <div class="mb-3">
+      <input type="text" class="form-control" [(ngModel)]="selectedComponent.component_name" />
+    </div>
+    <div class="mb-3">
+      <input type="text" class="form-control" [(ngModel)]="selectedComponent.description" />
+    </div>
+    <div class="d-flex gap-2">
+      <button class="btn btn-primary" (click)="updateComponent()">Update</button>
+      <button class="btn btn-secondary" (click)="editMode = false">Cancel</button>
     </div>
   </div>
   
+  <!-- Component List -->
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+      <thead class="table-primary">
+        <tr>
+          <th>ID</th>
+          <th>Component Name</th>
+          <th>Description</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let component of components">
+          <td>{{ component.component_id }}</td>
+          <td>{{ component.component_name }}</td>
+          <td>{{ component.description }}</td>
+          <td class="d-flex gap-2">
+            <button class="btn btn-warning btn-sm" (click)="editComponent(component)">Edit</button>
+            <button class="btn btn-danger btn-sm" (click)="deleteComponent(component.component_id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

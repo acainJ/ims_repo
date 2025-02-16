@@ -21,8 +21,8 @@ export class SupplierService {
   }
 
   // Update an existing supplier
-  updateSupplier(id: string, supplier: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/${id}`, supplier);
+  updateSupplier(supplier_id: number, supplierData: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${supplier_id}`, supplierData);
   }
 
   // Delete a supplier by ID
