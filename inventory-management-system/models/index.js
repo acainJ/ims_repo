@@ -1,5 +1,7 @@
 const sequelize = require("../config/database"); // ✅ Import database connection
 const Supplier = require("./supplierModel"); // ✅ Import model
+const Component = require("./componentModel");
+const Product = require("./productModel")
 
 // Sync models with the database
 sequelize
@@ -9,7 +11,9 @@ sequelize
 
 const db = {
   sequelize, // ✅ Store Sequelize instance
-  Supplier,  // ✅ Store Supplier model
+  Supplier,
+  Component,
+  Product  // ✅ Store Supplier model
 };
 
 module.exports = db; // ✅ Export db object

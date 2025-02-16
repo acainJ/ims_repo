@@ -2,6 +2,9 @@ const express = require("express");
 const dotenv = require("dotenv").config();
 const {sequelize} = require("./models")
 const supplierRoutes = require("./routes/supplierRoutes");
+const componentRoutes = require("./routes/componentRoutes");
+const productRoutes = require("./routes/productRoutes");
+
 const errorHandler = require("./middleware/errorHandler");
 
 const app = express();
@@ -14,6 +17,8 @@ app.use(express.json());
 
 // Middleware
 app.use("/api/suppliers", supplierRoutes);
+app.use("/api/components", componentRoutes);
+app.use("/api/products", productRoutes);
 app.use(errorHandler);
 
 // Sync Database and Start Server
