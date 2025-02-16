@@ -1,7 +1,9 @@
-const sequelize = require("../config/database"); // ✅ Import database connection
-const Supplier = require("./supplierModel"); // ✅ Import model
+const sequelize = require("../config/database");
+const Supplier = require("./supplierModel"); 
 const Component = require("./componentModel");
-const Product = require("./productModel")
+const Product = require("./productModel");
+const ProductComponent = require("./productComponentModel");
+const ComponentSupplier = require("./componentSupplierModel")
 
 // Sync models with the database
 sequelize
@@ -10,10 +12,12 @@ sequelize
   .catch((err) => console.error("❌ Error syncing tables:", err));
 
 const db = {
-  sequelize, // ✅ Store Sequelize instance
+  sequelize,
   Supplier,
   Component,
-  Product  // ✅ Store Supplier model
+  Product,
+  ProductComponent,
+  ComponentSupplier 
 };
 
-module.exports = db; // ✅ Export db object
+module.exports = db; 
