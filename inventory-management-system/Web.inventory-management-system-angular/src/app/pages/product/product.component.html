@@ -1,0 +1,22 @@
+<div class="product-container">
+    <h1>Products</h1>
+  
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+        <thead class="table-primary">
+          <tr>
+            <th>ID</th>
+            <th>Product Name</th>
+            <th>Quantity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products">
+            <td>{{ product.product_id }}</td>
+            <td>{{ product.product_name }}</td>
+            <td>{{ product.quantity_on_hand }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

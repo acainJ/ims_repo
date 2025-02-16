@@ -1,16 +1,16 @@
 CREATE DATABASE ims;
 
--- CREATE TABLE Products (
---     product_id INT PRIMARY KEY AUTO_INCREMENT,
---     product_name VARCHAR(255) NOT NULL,
---     quantity_on_hand INT NOT NULL
--- );
+CREATE TABLE Products (
+    product_id INT PRIMARY KEY AUTO_INCREMENT,
+    product_name VARCHAR(255) NOT NULL,
+    quantity_on_hand INT NOT NULL
+);
 
--- CREATE TABLE Components (
---     component_id INT PRIMARY KEY AUTO_INCREMENT,
---     component_name VARCHAR(255) NOT NULL,
---     description TEXT
--- );
+CREATE TABLE Components (
+    component_id INT PRIMARY KEY AUTO_INCREMENT,
+    component_name VARCHAR(255) NOT NULL,
+    description TEXT
+);
 
 CREATE TABLE Suppliers (
     supplier_id INT PRIMARY KEY AUTO_INCREMENT,
