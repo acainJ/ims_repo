@@ -9,10 +9,10 @@ const {
 } = require("../controllers/supplierController"); // Ensure correct import
 
 // Define REST API routes
-router.get("/", getAllSupplier); // GET http://localhost:5001/api/suppliers
-router.post("/", createSupplier); // POST http://localhost:5001/api/suppliers
-router.get("/:id", getSupplier); // GET http://localhost:5001/api/suppliers/:id
-router.put("/:id", updateSupplier); // PUT http://localhost:5001/api/suppliers/:id
-router.delete("/:id", deleteSupplier); // DELETE http://localhost:5001/api/suppliers/:id
+router.get("/", getAllSupplier);
+router.post("/", createSupplier);
+router.get("/:id", getSupplier); 
+router.put("/:id", updateSupplier); 
+router.delete("/:id", deleteSupplier); 
 
 module.exports = router;

@@ -19,19 +19,19 @@ CREATE TABLE Suppliers (
 );
 
 -- Many-to-Many Relationship between Products and Components
--- CREATE TABLE Product_Components (
---     product_id INT,
---     component_id INT,
---     PRIMARY KEY (product_id, component_id),
---     FOREIGN KEY (product_id) REFERENCES Products(product_id) ON DELETE CASCADE,
---     FOREIGN KEY (component_id) REFERENCES Components(component_id) ON DELETE CASCADE
--- );
+CREATE TABLE Product_Components (
+    product_id INT,
+    component_id INT,
+    PRIMARY KEY (product_id, component_id),
+    FOREIGN KEY (product_id) REFERENCES Products(product_id) ON DELETE CASCADE,
+    FOREIGN KEY (component_id) REFERENCES Components(component_id) ON DELETE CASCADE
+);
 
--- -- Many-to-Many Relationship between Components and Suppliers
--- CREATE TABLE Component_Suppliers (
---     component_id INT,
---     supplier_id INT,
---     PRIMARY KEY (component_id, supplier_id),
---     FOREIGN KEY (component_id) REFERENCES Components(component_id) ON DELETE SET NULL,
---     FOREIGN KEY (supplier_id) REFERENCES Suppliers(supplier_id) ON DELETE SET NULL
--- );
+-- Many-to-Many Relationship between Components and Suppliers
+CREATE TABLE Component_Suppliers (
+    component_id INT,
+    supplier_id INT,
+    PRIMARY KEY (component_id, supplier_id),
+    FOREIGN KEY (component_id) REFERENCES Components(component_id) ON DELETE CASCADE,
+    FOREIGN KEY (supplier_id) REFERENCES Suppliers(supplier_id) ON DELETE CASCADE
+);

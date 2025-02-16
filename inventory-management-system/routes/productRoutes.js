@@ -9,10 +9,10 @@ const {
 } = require("../controllers/productController"); // Ensure correct import
 
 // Define REST API routes
-router.get("/", getAllProduct); // GET http://localhost:5001/api/suppliers
-router.post("/", createProduct); // POST http://localhost:5001/api/suppliers
-router.get("/:id", getProduct); // GET http://localhost:5001/api/suppliers/:id
-router.put("/:id", updateProduct); // PUT http://localhost:5001/api/suppliers/:id
-router.delete("/:id", deleteProduct); // DELETE http://localhost:5001/api/suppliers/:id
+router.get("/", getAllProduct);
+router.post("/", createProduct); 
+router.get("/:id", getProduct); 
+router.put("/:id", updateProduct); 
+router.delete("/:id", deleteProduct); 
 
 module.exports = router;
