@@ -1,22 +1,55 @@
-<div class="product-container">
-    <h1>Products</h1>
-  
-    <div class="table-responsive">
-      <table class="table table-bordered table-striped">
-        <thead class="table-primary">
-          <tr>
-            <th>ID</th>
-            <th>Product Name</th>
-            <th>Quantity</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let product of products">
-            <td>{{ product.product_id }}</td>
-            <td>{{ product.product_name }}</td>
-            <td>{{ product.quantity_on_hand }}</td>
-          </tr>
-        </tbody>
-      </table>
+<div class="product-container mt-4">
+  <h1 class="text-center mb-4">Products</h1>
+
+  <!-- Add Product Form -->
+  <div class="card p-3 mb-4">
+    <h4>Add Product</h4>
+    <div class="mb-3">
+      <input type="text" class="form-control" placeholder="Product Name" [(ngModel)]="newProduct.product_name" />
+    </div>
+    <div class="mb-3">
+      <input type="number" class="form-control" placeholder="Quantity" [(ngModel)]="newProduct.quantity_on_hand" />
+    </div>
+    <button class="btn btn-success" (click)="addProduct()">Add Product</button>
+  </div>
+
+  <!-- Edit Product Form -->
+  <div *ngIf="editMode && selectedProduct" class="card p-3 mb-4">
+    <h4>Edit Product</h4>
+    <div class="mb-3">
+      <input type="text" class="form-control" [(ngModel)]="selectedProduct.product_name" />
+    </div>
+    <div class="mb-3">
+      <input type="number" class="form-control" [(ngModel)]="selectedProduct.quantity_on_hand" />
+    </div>
+    <div class="d-flex gap-2">
+      <button class="btn btn-primary" (click)="updateProduct()">Update</button>
+      <button class="btn btn-secondary" (click)="editMode = false">Cancel</button>
     </div>
   </div>
+
+  <!-- Product List -->
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+      <thead class="table-primary">
+        <tr>
+          <th>ID</th>
+          <th>Product Name</th>
+          <th>Quantity</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td>{{ product.product_id }}</td>
+          <td>{{ product.product_name }}</td>
+          <td>{{ product.quantity_on_hand }}</td>
+          <td class="d-flex gap-2">
+            <button class="btn btn-warning btn-sm" (click)="editProduct(product)">Edit</button>
+            <button class="btn btn-danger btn-sm" (click)="deleteProduct(product.product_id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
