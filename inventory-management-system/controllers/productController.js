@@ -1,4 +1,4 @@
-const Product = require("../models/productModel"); // Import the model
+const {Product,Component} = require("../models"); // Import the model
 
 //@desc GET ALL
 const getAllProduct = async (req, res) => {
@@ -14,8 +14,13 @@ const getAllProduct = async (req, res) => {
 const createProduct = async (req, res) => {
     try {
         const { product_name, quantity_on_hand } = req.body; // Get data from request
-        const newProduct = await Product.create({ product_name, quantity_on_hand });
-        res.status(201).json(newProduct);
+        const newProduct = await Product.create({ product_name, quantity_on_hand, component_id });
+        if(component_id = null){
+            console.log("Component must have value")
+            return
+        } else {
+            res.status(201).json(newProduct);
+        }   
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -59,4 +64,13 @@ const deleteProduct = async (req, res) => {
     }
 }
 
-module.exports = { getAllProduct, getProduct, createProduct, updateProduct, deleteProduct };
+const getAllComponents = async (req, res) => {
+    try {
+        const components = await Component.findAll({ include: Supplier });
+        res.json(components);
+    } catch (error) {
+        res.status(500).json({ message: "Internal server error" });
+    }
+};
+
+module.exports = { getAllProduct, getProduct, createProduct, updateProduct, deleteProduct, getAllComponents };

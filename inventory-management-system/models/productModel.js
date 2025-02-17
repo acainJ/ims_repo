@@ -14,6 +14,14 @@ const Product = sequelize.define('Product', {
     quantity_on_hand: {
         type: DataTypes.INTEGER,
         allowNull: false
+    },
+    component_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'Components', 
+            key: 'component_id'
+        }
     }
 }, {
     tableName: 'Products',

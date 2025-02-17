@@ -13,6 +13,14 @@ const Component = sequelize.define('Component', {
     },
     description: {
         type: DataTypes.TEXT
+    },
+    supplier_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        references: {
+            model: 'Suppliers', 
+            key: 'supplier_id'
+        },
     }
 }, {
     tableName: 'Components',

@@ -2,8 +2,6 @@ const sequelize = require("../config/database");
 const Supplier = require("./supplierModel"); 
 const Component = require("./componentModel");
 const Product = require("./productModel");
-const ProductComponent = require("./productComponentModel");
-const ComponentSupplier = require("./componentSupplierModel")
 
 // Sync models with the database
 sequelize
@@ -16,8 +14,7 @@ const db = {
   Supplier,
   Component,
   Product,
-  ProductComponent,
-  ComponentSupplier 
+
 };
 
 module.exports = db; 
