@@ -1,9 +1,9 @@
-const { Component , Supplier} = require("../models/"); // Import the model
+const { Component} = require("../models/"); // Import the model
 
 //@desc GET ALL
 const getAllComponent = async (req, res) => {
     try {
-        const components = await Component.findAll(); // Fetch all components from DB
+        const components = await Component.findAll();
         res.status(200).json(components);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -13,8 +13,8 @@ const getAllComponent = async (req, res) => {
 //@desc CREATE
 const createComponent = async (req, res) => {
     try {
-        const { component_name, description } = req.body; // Get data from request
-        const newComponent = await Component.create({ component_name, description, supplier_id });
+        const { component_name, description, supplier_id,} = req.body; // Get data from request
+        const newComponent = await Component.create({ component_name, description, supplier_id});
         res.status(201).json(newComponent);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -59,13 +59,5 @@ const deleteComponent = async (req, res) => {
     }
 }
 
-const getAllSuppliers = async (req, res) => {
-    try {
-        const suppliers = await Supplier.findAll({ include: Component });
-        res.json(suppliers);
-    } catch (error) {
-        res.status(500).json({ message: "Internal server error" });
-    }
-};
 
-module.exports = { getAllComponent, getComponent, createComponent, updateComponent, deleteComponent, getAllSuppliers };
+module.exports = { getAllComponent, getComponent, createComponent, updateComponent, deleteComponent };

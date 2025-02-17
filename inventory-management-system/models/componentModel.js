@@ -21,7 +21,11 @@ const Component = sequelize.define('Component', {
             model: 'Suppliers', 
             key: 'supplier_id'
         },
-    }
+    },
+    // supplier_name: {
+    //     type: DataTypes.STRING,
+    //     allowNull: true
+    // },
 }, {
     tableName: 'Components',
     timestamps: false

@@ -1,4 +1,4 @@
-const {Product,Component} = require("../models"); // Import the model
+const {Product} = require("../models"); // Import the model
 
 //@desc GET ALL
 const getAllProduct = async (req, res) => {
@@ -64,13 +64,5 @@ const deleteProduct = async (req, res) => {
     }
 }
 
-const getAllComponents = async (req, res) => {
-    try {
-        const components = await Component.findAll({ include: Supplier });
-        res.json(components);
-    } catch (error) {
-        res.status(500).json({ message: "Internal server error" });
-    }
-};
 
-module.exports = { getAllProduct, getProduct, createProduct, updateProduct, deleteProduct, getAllComponents };
+module.exports = { getAllProduct, getProduct, createProduct, updateProduct, deleteProduct };
