@@ -13,6 +13,6 @@ router.get("/", getAllComponent);
 router.post("/", createComponent);
 router.get("/:id", getComponent); 
 router.put("/:id", updateComponent)
-router.delete("/:id", deleteComponent); 
+router.delete("/:id", deleteComponent);
 
 module.exports = router;

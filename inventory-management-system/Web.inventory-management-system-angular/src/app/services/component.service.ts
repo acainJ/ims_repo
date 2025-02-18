@@ -11,7 +11,7 @@ export class ComponentService {
   constructor(private http: HttpClient) {}
 
   // Get all components
-  getComponents(): Observable<any[]> {
+  getAllComponents(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
   }
 

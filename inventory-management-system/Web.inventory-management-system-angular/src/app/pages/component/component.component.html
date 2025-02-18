@@ -10,7 +10,14 @@
     <div class="mb-3">
       <input type="text" class="form-control" placeholder="Description" [(ngModel)]="newComponent.description" />
     </div>
-    <button class="btn btn-success" (click)="addComponent()">Add Component</button>
+    <div class="mb-3">
+      <select id="supplier" class="form-control" [(ngModel)]="newComponent.supplier_id" placeholder="Supplier">
+        <option *ngFor="let supplier of suppliers" [value]="supplier.supplier_id">
+          {{ supplier.supplier_name }}
+        </option>
+      </select>
+    </div>
+        <button class="btn btn-success" (click)="addComponent()">Add Component</button>
   </div>
 
   <!-- Edit Component Form -->
@@ -21,6 +28,13 @@
     </div>
     <div class="mb-3">
       <input type="text" class="form-control" [(ngModel)]="selectedComponent.description" />
+    </div>
+    <div class="mb-3">
+      <select id="supplier" class="form-control" [(ngModel)]="selectedComponent.supplier_id">
+        <option *ngFor="let supplier of suppliers" [value]="supplier.supplier_id">
+          {{ supplier.supplier_name }}
+        </option>
+      </select>
     </div>
     <div class="d-flex gap-2">
       <button class="btn btn-primary" (click)="updateComponent()">Update</button>
@@ -36,6 +50,7 @@
           <th>ID</th>
           <th>Component Name</th>
           <th>Description</th>
+          <th>Supplier</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -44,6 +59,7 @@
           <td>{{ component.component_id }}</td>
           <td>{{ component.component_name }}</td>
           <td>{{ component.description }}</td>
+          <td>{{component.supplier?.supplier_name || '' }}</td>
           <td class="d-flex gap-2">
             <button class="btn btn-warning btn-sm" (click)="editComponent(component)">Edit</button>
             <button class="btn btn-danger btn-sm" (click)="deleteComponent(component.component_id)">Delete</button>

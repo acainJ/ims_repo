@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ComponentService } from '../../services/component.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { SupplierService } from '../../services/supplier.service';
 
 @Component({
   selector: 'app-component',
@@ -12,20 +13,23 @@ import { FormsModule } from '@angular/forms';
 })
 export class ComponentComponent implements OnInit {
   components: any[] = [];
-  newComponent = { component_name: '', description: '' };
+  newComponent = { component_name: '', description: '',  supplier_id: null};
   editMode = false;
   selectedComponent: any = null;
+  suppliers : any [] = [];
 
-  constructor(private componentService: ComponentService) {}
+  constructor(private componentService: ComponentService, private supplierService: SupplierService) {}
 
   ngOnInit(): void {
     this.fetchComponents();
+    this.fetchSuppliers();
   }
 
   fetchComponents(): void {
-    this.componentService.getComponents().subscribe(
+    this.componentService.getAllComponents().subscribe(
       (data) => {
         this.components = data;
+          console.log(data)
       },
       (error) => {
         console.error('Error fetching components:', error);
@@ -37,13 +41,15 @@ export class ComponentComponent implements OnInit {
     this.componentService.addComponent(this.newComponent).subscribe(
       (response) => {
         this.components.push(response);
-        this.newComponent = { component_name: '', description: '' };
+        this.newComponent = { component_name: '', description: '', supplier_id: null};
+        this.fetchComponents();
       },
       (error) => {
         console.error('Error adding component:', error);
       }
     );
   }
+  
 
   editComponent(component: any): void {
     this.editMode = true;
@@ -59,8 +65,10 @@ export class ComponentComponent implements OnInit {
       next: (updatedComponent) => {
         const index = this.components.findIndex((c) => c.component_id === updatedComponent.component_id);
         if (index !== -1) {
+          // updatedComponent.supplier = this.components[index].supplier || null;
           this.components[index] = { ...updatedComponent };
         }
+        this.fetchComponents()
         this.editMode = false;
         this.selectedComponent = null;
       },
@@ -75,6 +83,17 @@ export class ComponentComponent implements OnInit {
       },
       (error) => {
         console.error('Error deleting component:', error);
+      }
+    );
+  }
+
+  fetchSuppliers(): void {
+    this.supplierService.getSuppliers().subscribe(
+      (data) => {
+        this.suppliers = data;
+      },
+      (error) => {
+        console.error('Error fetching suppliers:', error);
       }
     );
   }

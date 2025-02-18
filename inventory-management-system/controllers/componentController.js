@@ -1,9 +1,15 @@
-const Component = require("../models/componentModel"); // Import the model
+const { Component, Supplier} = require("../models/"); // Import the model
 
 //@desc GET ALL
 const getAllComponent = async (req, res) => {
     try {
-        const components = await Component.findAll(); // Fetch all components from DB
+        const components = await Component.findAll({
+            include:{
+                model: Supplier,
+                as: 'supplier',
+                attributes:['supplier_name']
+            }
+        });
         res.status(200).json(components);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -13,8 +19,8 @@ const getAllComponent = async (req, res) => {
 //@desc CREATE
 const createComponent = async (req, res) => {
     try {
-        const { component_name, description } = req.body; // Get data from request
-        const newComponent = await Component.create({ component_name, description });
+        const { component_name, description, supplier_id,} = req.body; // Get data from request
+        const newComponent = await Component.create({ component_name, description, supplier_id});
         res.status(201).json(newComponent);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -58,5 +64,6 @@ const deleteComponent = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 }
+
 
 module.exports = { getAllComponent, getComponent, createComponent, updateComponent, deleteComponent };
