@@ -1,9 +1,15 @@
-const { Component} = require("../models/"); // Import the model
+const { Component, Supplier} = require("../models/"); // Import the model
 
 //@desc GET ALL
 const getAllComponent = async (req, res) => {
     try {
-        const components = await Component.findAll();
+        const components = await Component.findAll({
+            include:{
+                model: Supplier,
+                as: 'supplier',
+                attributes:['supplier_name']
+            }
+        });
         res.status(200).json(components);
     } catch (error) {
         res.status(500).json({ error: error.message });
